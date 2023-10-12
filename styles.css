@@ -1,0 +1,94 @@
+@font-face {
+  font-family: "Ukrainian Barokko 2D";
+  src: url("./assets/fonts/ukrainian-barokko-2d.woff2") format("woff2"),
+    url("./assets/fonts/ukrainian-barokko-2d.woff") format("woff");
+}
+@font-face {
+  font-family: "Kyiv Type Titling";
+  src: url("./assets/fonts/KyivTypeTitling-Medium.woff2") format("woff2"),
+    url("./assets/fonts/KyivTypeTitling-Medium.woff") format("woff");
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  background: rgba(3, 2, 2, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Ukrainian Barokko 2D";
+  font-size: 2rem;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(60px, 1fr));
+  max-width: 660px;
+  gap: 30px;
+  box-shadow: 0 2.5px 39.5px rgba(192, 189, 189, 0.25);
+  border-radius: 24px;
+  padding: 65px 100px;
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  border-radius: 24px;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 800px;
+  height: 840px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+div {
+  text-align: center;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: none;
+}
+.month {
+  grid-column: span 5;
+  font-family: "Ukrainian Barokko 2D";
+  /* text-transform: uppercase; */
+  line-height: 32px;
+  font-size: 56px;
+  letter-spacing: 10px;
+  color: #ecd81c;
+}
+
+.day-of-week {
+  color: #00b8e6;
+  font-weight: bold;
+  letter-spacing: 10px;
+  font-size: 36px;
+  margin-bottom: 22px;
+}
+
+.today {
+  background: #00b8e6;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+}
+
+.date-number {
+  font-family: "Ukrainian Barokko 2D";
+font-weight: 600;
+  color: #ecd81c;
+  letter-spacing: 10px;
+  font-size: 38px;
+}
