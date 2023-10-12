@@ -26,7 +26,7 @@ var monthIndexToImage = {
     4: "url('../assets/images/bg/mazepa.webp')",
     5: "url('../assets/images/bg/nalyvayko.webp')",
     6: "url('../assets/images/bg/orlyk.webp')",
-    7: "url('../assets/images/bg/pavlusenko.webp')",
+    7: "url('../assets/images/bg/samoylovych.jpg')",
     8: "url('../assets/images/bg/pidkova.webp')",
     9: "url('../assets/images/bg/sagaydachny.webp')",
     10: "url('../assets/images/bg/sirko.webp')",
