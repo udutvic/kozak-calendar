@@ -21,16 +21,16 @@ var monthIndexToName = {
 var monthIndexToImage = {
     0: "url('./assets/images/bg/bayda.webp')",
     1: "url('./assets/images/bg/bohun.webp')",
-    2: "url('../assets/images/bg/doroshenko.webp')",
-    3: "url('../assets/images/bg/hmelnitskiy.webp')",
-    4: "url('../assets/images/bg/mazepa.webp')",
-    5: "url('../assets/images/bg/nalyvayko.webp')",
-    6: "url('../assets/images/bg/orlyk.webp')",
-    7: "url('../assets/images/bg/samoylovych.jpg')",
-    8: "url('../assets/images/bg/pidkova.webp')",
-    9: "url('../assets/images/bg/sagaydachny.webp')",
-    10: "url('../assets/images/bg/sirko.webp')",
-    11: "url('../assets/images/bg/sulyma.webp')",
+    2: "url('./assets/images/bg/doroshenko.webp')",
+    3: "url('./assets/images/bg/hmelnitskiy.webp')",
+    4: "url('./assets/images/bg/mazepa.webp')",
+    5: "url('./assets/images/bg/nalyvayko.webp')",
+    6: "url('./assets/images/bg/orlyk.webp')",
+    7: "url('./assets/images/bg/samoylovych.webp')",
+    8: "url('./assets/images/bg/pidkova.webp')",
+    9: "url('./assets/images/bg/sagaydachny.webp')",
+    10: "url('./assets/images/bg/sirko.webp')",
+    11: "url('./assets/images/bg/sulyma.webp')",
 }
 
 var monthElement = document.querySelector('.month');
