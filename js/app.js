@@ -57,6 +57,10 @@ nextiusButton.addEventListener('click', () => {
 
 var dateNumberElements = [...document.querySelectorAll('.date-number')];
 
+var wrapperStyle = document.createElement("style");
+wrapperStyle.type = "text/css";
+document.body.appendChild(wrapperStyle);
+
 var renderMonth = (monthIndex, year) => {
     monthElement.innerHTML = `${monthIndexToName[monthIndex]} / ${year}`;
 
@@ -68,11 +72,8 @@ var renderMonth = (monthIndex, year) => {
         var date = (index + 1) - firstDay;       
 
         element.innerHTML = (date > 0) && (date <= numDaysInMonth) ? date : '';
-
-        var css = document.createElement("style");
-        css.type = "text/css";
-        css.innerHTML = ".wrapper::before { background-image: " + monthIndexToImage[monthIndex] + "; }";
-        document.body.appendChild(css);     
+       
+        wrapperStyle.innerHTML = ".wrapper::before { background-image: " + monthIndexToImage[monthIndex] + "; }";             
         
         var today = new Date();
         if (today.getMonth() === monthIndex && today.getFullYear() === year && today.getDate() === date) {
