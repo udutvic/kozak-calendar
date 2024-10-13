@@ -9,19 +9,28 @@ const monthIndexToName = [
 ];
 
 const monthIndexToImage = [
-    "url('./assets/images/bg/bayda.webp')",
-    "url('./assets/images/bg/bohun.webp')",
-    "url('./assets/images/bg/doroshenko.webp')",
-    "url('./assets/images/bg/hmelnitskiy.webp')",
-    "url('./assets/images/bg/mazepa.webp')",
-    "url('./assets/images/bg/nalyvayko.webp')",
-    "url('./assets/images/bg/orlyk.webp')",
-    "url('./assets/images/bg/samoylovych.webp')",
-    "url('./assets/images/bg/pidkova.webp')",
-    "url('./assets/images/bg/sagaydachny.webp')",
-    "url('./assets/images/bg/sirko.webp')",
-    "url('./assets/images/bg/sulyma.webp')"
+    "./assets/images/bg/bayda.webp",
+    "./assets/images/bg/bohun.webp",
+    "./assets/images/bg/doroshenko.webp",
+    "./assets/images/bg/hmelnitskiy.webp",
+    "./assets/images/bg/mazepa.webp",
+    "./assets/images/bg/nalyvayko.webp",
+    "./assets/images/bg/orlyk.webp",
+    "./assets/images/bg/samoylovych.webp",
+    "./assets/images/bg/pidkova.webp",
+    "./assets/images/bg/sagaydachny.webp",
+    "./assets/images/bg/sirko.webp",
+    "./assets/images/bg/sulyma.webp"
 ];
+
+// Завчасне завантаження зображень
+const preloadImages = () => {
+    monthIndexToImage.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+};
+preloadImages();
 
 const monthElement = document.querySelector('.month');
 const previousButton = document.querySelector('.previous');
@@ -49,17 +58,17 @@ nextButton.addEventListener('click', () => updateMonthAndYear('next'));
 
 const dateNumberElements = [...document.querySelectorAll('.date-number')];
 
-const wrapperStyle = document.createElement("style");
-wrapperStyle.type = "text/css";
-document.head.appendChild(wrapperStyle);
+// Оновлення стилю без використання innerHTML
+const wrapperElement = document.querySelector('.wrapper');
 
 const renderMonth = (monthIndex, year) => {
     monthElement.textContent = `${monthIndexToName[monthIndex]} / ${year}`;
 
-    const firstDay = new Date(year, monthIndex, 1).getDay(); // Перший день місяця
+    const firstDay = new Date(year, monthIndex, 1).getDay();
     const numDaysInMonth = new Date(year, monthIndex + 1, 0).getDate();
 
-    wrapperStyle.innerHTML = `.wrapper::before { background-image: ${monthIndexToImage[monthIndex]}; }`;
+    // Зміна зображення через CSS-властивість style
+    wrapperElement.style.setProperty('--background-image', `url(${monthIndexToImage[monthIndex]})`);
 
     const today = new Date();
     dateNumberElements.forEach((element, index) => {
