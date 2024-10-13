@@ -1,88 +1,78 @@
-var now = new Date();
+const now = new Date();
 
-var curentMonth = now.getMonth();
-var curentYear = now.getFullYear();
+let currentMonth = now.getMonth();
+let currentYear = now.getFullYear();
 
-var monthIndexToName = {
-    0: 'Січень',
-    1: 'Лютий',
-    2: 'Березень',
-    3: 'Квітень',
-    4: 'Травень',
-    5: 'Червень',
-    6: 'Липень',
-    7: 'Серпень',
-    8: 'Вересень',
-    9: 'Жовтень',
-    10: 'Листопад',
-    11: 'Грудень',
-}
+const monthIndexToName = [
+    'Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 
+    'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'
+];
 
-var monthIndexToImage = {
-    0: "url('./assets/images/bg/bayda.webp')",
-    1: "url('./assets/images/bg/bohun.webp')",
-    2: "url('./assets/images/bg/doroshenko.webp')",
-    3: "url('./assets/images/bg/hmelnitskiy.webp')",
-    4: "url('./assets/images/bg/mazepa.webp')",
-    5: "url('./assets/images/bg/nalyvayko.webp')",
-    6: "url('./assets/images/bg/orlyk.webp')",
-    7: "url('./assets/images/bg/samoylovych.webp')",
-    8: "url('./assets/images/bg/pidkova.webp')",
-    9: "url('./assets/images/bg/sagaydachny.webp')",
-    10: "url('./assets/images/bg/sirko.webp')",
-    11: "url('./assets/images/bg/sulyma.webp')",
-}
+const monthIndexToImage = [
+    "url('./assets/images/bg/bayda.webp')",
+    "url('./assets/images/bg/bohun.webp')",
+    "url('./assets/images/bg/doroshenko.webp')",
+    "url('./assets/images/bg/hmelnitskiy.webp')",
+    "url('./assets/images/bg/mazepa.webp')",
+    "url('./assets/images/bg/nalyvayko.webp')",
+    "url('./assets/images/bg/orlyk.webp')",
+    "url('./assets/images/bg/samoylovych.webp')",
+    "url('./assets/images/bg/pidkova.webp')",
+    "url('./assets/images/bg/sagaydachny.webp')",
+    "url('./assets/images/bg/sirko.webp')",
+    "url('./assets/images/bg/sulyma.webp')"
+];
 
-var monthElement = document.querySelector('.month');
-var previusButton = document.querySelector('.previous');
-var nextiusButton = document.querySelector('.next');
+const monthElement = document.querySelector('.month');
+const previousButton = document.querySelector('.previous');
+const nextButton = document.querySelector('.next');
 
-previusButton.addEventListener('click', () => {
-    curentMonth--;
-    if (curentMonth < 0) {
-        curentMonth = 11;
-        curentYear--;
+const updateMonthAndYear = (direction) => {
+    if (direction === 'previous') {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+    } else if (direction === 'next') {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
     }
-    renderMonth(curentMonth, curentYear);
-})
+    renderMonth(currentMonth, currentYear);
+};
 
-nextiusButton.addEventListener('click', () => {
-    curentMonth++;
-    if (curentMonth > 11) {
-        curentMonth = 0;
-        curentYear++;
-    }
-    renderMonth(curentMonth, curentYear);
-})
+previousButton.addEventListener('click', () => updateMonthAndYear('previous'));
+nextButton.addEventListener('click', () => updateMonthAndYear('next'));
 
-var dateNumberElements = [...document.querySelectorAll('.date-number')];
+const dateNumberElements = [...document.querySelectorAll('.date-number')];
 
-var wrapperStyle = document.createElement("style");
+const wrapperStyle = document.createElement("style");
 wrapperStyle.type = "text/css";
-document.body.appendChild(wrapperStyle);
+document.head.appendChild(wrapperStyle);
 
-var renderMonth = (monthIndex, year) => {
-    monthElement.innerHTML = `${monthIndexToName[monthIndex]} / ${year}`;
+const renderMonth = (monthIndex, year) => {
+    monthElement.textContent = `${monthIndexToName[monthIndex]} / ${year}`;
 
-    var firstDay = new Date(year, monthIndex, 0).getDay();
+    const firstDay = new Date(year, monthIndex, 1).getDay(); // Перший день місяця
+    const numDaysInMonth = new Date(year, monthIndex + 1, 0).getDate();
 
-    var numDaysInMonth = new Date(year, monthIndex + 1, 0).getDate()
+    wrapperStyle.innerHTML = `.wrapper::before { background-image: ${monthIndexToImage[monthIndex]}; }`;
 
+    const today = new Date();
     dateNumberElements.forEach((element, index) => {
-        var date = (index + 1) - firstDay;       
+        const date = index + 1 - firstDay;
 
-        element.innerHTML = (date > 0) && (date <= numDaysInMonth) ? date : '';
-       
-        wrapperStyle.innerHTML = ".wrapper::before { background-image: " + monthIndexToImage[monthIndex] + "; }";             
-        
-        var today = new Date();
+        element.textContent = (date > 0 && date <= numDaysInMonth) ? date : '';
+
         if (today.getMonth() === monthIndex && today.getFullYear() === year && today.getDate() === date) {
             element.classList.add('today');
         } else {
             element.classList.remove('today');
         }
+    });
+};
 
-    })
-}
-
-renderMonth(curentMonth, curentYear);
+renderMonth(currentMonth, currentYear);
